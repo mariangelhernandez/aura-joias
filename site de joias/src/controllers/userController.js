@@ -1,32 +1,47 @@
-import {createUser, getUser} from "../services/userService.js"
+import userService from "../services/userService.js"; 
 
 const userController = {
-    async getAll(req, res){
-        try{ 
-            const user = await userService.getAllUsers();
-            res.json(user);
-        }catch(error){
-            res.status(404).json({erro: error.message})
+    async getAll(req, res) {
+        try {
+            const users = await userService.getAllUsers();
+            return res.status(200).json(users);
+        } catch (error) {
+            return res.status(400).json({ error: error.message });
         }
     },
 
-    async create(req, res){
-        try{
-            const novoUser = await userService.createUser(req.body);
-            res.status(201).json(novoUser);
-        }catch(error){
-            res.status(400).json({erro: error.message});
+    async create(req, res) {
+        try {
+            const newUser = await userService.createUser(req.body);
+            return res.status(201).json(newUser);
+        } catch (error) {
+            return res.status(400).json({ error: error.message });
         }
     },
 
-    async update(req, res){
-        try{
-            const userAtualizado = await userService.updateUser(
-                req.params.id, req.body)
-            res.json(UserAtualizado)
-        }catch(error){
-            const status = error.message === "Usuario não encontrado" ? 404 : 400;
-            res.status(status).json({erro: error.message});
+    async update(req, res) {
+        try {
+            const { id } = req.params;
+            const updatedUser = await userService.updateUser(id, req.body);
+            return res.status(200).json(updatedUser);
+        } catch (error) {
+            return res.status(400).json({ error: error.message });
+        }
+    },
+
+    async patch(req, res) {
+        try {
+            return res.status(200).json({ message: "Patch em desenvolvimento" });
+        } catch (error) {
+            return res.status(400).json({ error: error.message });
+        }
+    },
+
+    async delete(req, res) {
+        try {
+            return res.status(200).json({ message: "Delete em desenvolvimento" });
+        } catch (error) {
+            return res.status(400).json({ error: error.message });
         }
     }
 };

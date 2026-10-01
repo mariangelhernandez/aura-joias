@@ -28,7 +28,22 @@ const cartController = {
             const status = error.message === "carrinho não encontrado" ? 404 : 400;
             res.status(status).json({erro: error.message});
         }
-    }
+    },
+
+     async delete(req, res){
+        try{
+            const cartApagado = await cartService.deleteCart(
+                req.params.id, req.body)
+            res.json(cartApagado)
+        }catch(error){
+            const status = error.message === "apagado o carrinho" ? 404 : 400;
+            res.status(status).json({erro: error.message});
+        }
+
+    
+
+}
+
 };
 
 export default cartController;

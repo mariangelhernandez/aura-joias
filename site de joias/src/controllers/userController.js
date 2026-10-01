@@ -1,4 +1,4 @@
-import {userControllers} from "../service/userService"
+import {createUser, getUser} from "../services/userService.js"
 
 const userController = {
     async getAll(req, res){

@@ -1,4 +1,4 @@
-import {userRepository} from "../repositories/userRepository"; 
+import {userRepository} from "../repositories/userRepository.js"; 
 
 const userService = {
     async getAllUsers(){
@@ -12,7 +12,7 @@ const userService = {
         return await userRepository.create(userRequisicao);
     },
 
-    async updateUser(id, animalRequisicao){
+    async updateUser(id, userRequisicao){
         const userExistente = await userRepository.findById(id);
         if(!userExistente){
             throw new Error("Usuário não encontrado");
@@ -22,4 +22,4 @@ const userService = {
 };
 
 
-export default userService;
+export default userRepository;
